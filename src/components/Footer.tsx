@@ -7,7 +7,7 @@ const Footer: React.FC = () => {
       <div className="container">
         <div className="footer-content">
           <div className="footer-section">
-            <h3>LinguaTeach</h3>
+            <h3>LearnWithShanazar </h3>
             <p>Professional language teaching services for Turkish and English learners.</p>
             <div className="social-links">
               <a href="#" aria-label="Facebook">📘</a>
@@ -42,7 +42,7 @@ const Footer: React.FC = () => {
         </div>
         
         <div className="footer-bottom">
-          <p>&copy; 2025 LinguaTeach. All rights reserved.</p>
+          <p>&copy; 2025 LearnWithShanazar . All rights reserved.</p>
         </div>
       </div>
     </footer>

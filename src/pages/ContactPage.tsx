@@ -114,32 +114,53 @@ const ContactPage: React.FC = () => {
           
           <div className="contact-info">
             <div className="info-item">
-              <h3>📧 Email</h3>
-              <p>shanazartahyrov@gmail.com</p>
+              <h3>
+                <span className="icon">📧</span>
+                <span className="text">Email</span>
+              </h3>
+              <div className="content">
+                <p>shanazartahyrov@gmail.com</p>
+              </div>
             </div>
             
             <div className="info-item">
-              <h3>📱 Phone</h3>
-              <p>+62 852-1020-9575</p>
-              <p>Available: Mon-Fri, 9AM-6PM</p>
+              <h3>
+                <span className="icon">📱</span>
+                <span className="text">Phone</span>
+              </h3>
+              <div className="content">
+                <p>+62 852-1020-9575</p>
+                <p>Available: Mon-Fri, 9AM-6PM</p>
+              </div>
             </div>
             
             <div className="info-item">
-              <h3>📍 Location</h3>
-              <p>South Tangerang, Indonesia</p>
-              <p>Available for online lessons worldwide</p>
+              <h3>
+                <span className="icon">📍</span>
+                <span className="text">Location</span>
+              </h3>
+              <div className="content">
+                <p>South Tangerang, Indonesia</p>
+                <p>Available for online lessons worldwide</p>
+              </div>
             </div>
             
             <div className="info-item">
-              <h3>🌐 Social Media</h3>
-              <div className="social-links">
-                <a href="#" aria-label="Facebook">Facebook</a>
-                <a href="#" aria-label="Instagram">Instagram</a>
-                <a href="#" aria-label="LinkedIn">LinkedIn</a>
-                <a href="#" aria-label="YouTube">YouTube</a>
+              <h3>
+                <span className="icon">🌐</span>
+                <span className="text">Social Media</span>
+              </h3>
+              <div className="content">
+                <div className="social-links">
+                  <a href="#" aria-label="Facebook">Facebook</a>
+                  <a href="#" aria-label="Instagram">Instagram</a>
+                  <a href="#" aria-label="LinkedIn">LinkedIn</a>
+                  <a href="#" aria-label="YouTube">YouTube</a>
+                </div>
               </div>
             </div>
           </div>
+
         </div>
       </div>
     </div>

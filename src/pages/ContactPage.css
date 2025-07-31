@@ -22,6 +22,7 @@
   background-color: var(--bg-secondary);
   padding: 40px;
   border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
 }
 
 .success-message {
@@ -29,25 +30,33 @@
   padding: 60px;
   background-color: #dcfce7;
   border-radius: 12px;
+  border: 1px solid #bbf7d0;
 }
 
 .success-message h3 {
   color: var(--secondary-color);
   margin-bottom: 12px;
+  font-size: 24px;
+}
+
+.success-message p {
+  color: #059669;
+  font-size: 16px;
 }
 
 .contact-info {
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 24px;
 }
 
-info-item {
+.info-item {
   background-color: var(--bg-secondary);
-  padding: 24px;
+  padding: 28px;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .info-item:hover {
@@ -56,47 +65,190 @@ info-item {
 }
 
 .info-item h3 {
-  margin-bottom: 16px;
+  margin-bottom: 20px;
   color: var(--text-primary);
   font-size: 18px;
   font-weight: 600;
   display: flex;
-  align-items: center;
-  gap: 8px;
+  align-items: flex-start;
+  gap: 12px;
+  border-bottom: 2px solid var(--primary-color);
+  padding-bottom: 12px;
+  line-height: 1.2;
 }
 
+.info-item h3 .icon {
+  font-size: 20px;
+  min-width: 24px;
+  text-align: center;
+  margin-top: 2px;
+}
+
+.info-item h3 .text {
+  flex: 1;
+  margin-top: 2px;
+}
+
+.info-item .content {
+  margin-left: 36px; /* Align with text, not icon */
+}
+
+.info-item p {
+  margin: 6px 0;
+  color: var(--text-secondary);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.info-item p:first-of-type {
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+/* Email specific styling */
+.info-item p[href*="mailto"] {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+/* Phone number styling */
+.info-item p:has([href*="tel"]) {
+  color: var(--primary-color);
+  font-weight: 500;
+}
+
+/* Location styling improvements */
+.info-item:nth-child(3) .content p:last-child {
+  font-style: italic;
+  font-size: 14px;
+  color: var(--secondary-color);
+  margin-top: 12px;
+  padding: 8px 12px;
+  background-color: rgba(var(--primary-color-rgb), 0.1);
+  border-radius: 6px;
+  border-left: 3px solid var(--primary-color);
+}
+
+/* Social Media Section */
 .social-links {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 12px;
   margin-top: 16px;
+  margin-left: 0; /* Override the content margin */
 }
 
 .social-links a {
   display: inline-flex;
   align-items: center;
-  padding: 8px 16px;
-  background-color: var(--primary-color);
+  justify-content: center;
+  padding: 12px 16px;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
   color: white;
   text-decoration: none;
   font-weight: 500;
   font-size: 14px;
-  border-radius: 25px;
+  border-radius: 8px;
   transition: all 0.3s ease;
-  min-width: 80px;
-  justify-content: center;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.social-links a::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.social-links a:hover::before {
+  left: 100%;
 }
 
 .social-links a:hover {
-  background-color: var(--secondary-color);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   text-decoration: none;
 }
 
 .social-links a:active {
   transform: translateY(0);
+}
+
+/* Add icons for better visual hierarchy */
+.info-item h3::before {
+  font-size: 20px;
+  margin-right: 4px;
+}
+
+/* Contact form enhancements */
+.form-group {
+  margin-bottom: 40px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  background-color: white;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(var(--primary-color-rgb), 0.1);
+}
+
+.btn {
+  padding: 16px 32px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  box-shadow: 0 4px 12px rgba(var(--primary-color-rgb), 0.3);
+}
+
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(var(--primary-color-rgb), 0.4);
+}
+
+.btn-primary:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
 }
 
 /* Responsive Design */
@@ -108,6 +260,18 @@ info-item {
   .about-grid {
     grid-template-columns: 1fr;
     gap: 40px;
+  }
+  
+  .contact-content {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  
+  .contact-info {
+    order: -1;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
   }
 }
 
@@ -130,9 +294,13 @@ info-item {
     grid-template-columns: 1fr;
   }
   
-  .booking-content,
   .contact-content {
     grid-template-columns: 1fr;
+  }
+  
+  .contact-info {
+    grid-template-columns: 1fr;
+    gap: 24px;
   }
   
   .method-cards {
@@ -145,6 +313,14 @@ info-item {
   
   .package-card.featured {
     transform: scale(1);
+  }
+  
+  .social-links {
+    grid-template-columns: 1fr;
+  }
+  
+  .contact-hero h1 {
+    font-size: 36px;
   }
 }
 
@@ -166,5 +342,17 @@ info-item {
   .courses-filters {
     flex-direction: column;
     gap: 24px;
+  }
+  
+  .contact-form {
+    padding: 24px;
+  }
+  
+  .info-item {
+    padding: 20px;
+  }
+  
+  .contact-hero h1 {
+    font-size: 28px;
   }
 }

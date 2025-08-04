@@ -58,6 +58,77 @@ class ApiService {
       body: JSON.stringify(data),
     });
   }
+
+  // Admin endpoints
+  async adminLogin(credentials: { username: string; password: string }) {
+    return this.request<{ token: string; admin: any }>('/admin/login', {
+      method: 'POST',
+      body: JSON.stringify(credentials),
+    });
+  }
+  
+  // Teacher endpoints
+  async getTeachers() {
+    return this.request<Teacher[]>('/teachers');
+  }
+  
+  async createCourse(course: Partial<Course>) {
+    return this.request<Course>('/courses', {
+      method: 'POST',
+      body: JSON.stringify(course),
+    });
+  }
+  
+  async updateCourse(id: string, course: Partial<Course>) {
+    return this.request<Course>(`/courses/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(course),
+    });
+  }
+  
+  async deleteCourse(id: string) {
+    return this.request(`/courses/${id}`, {
+      method: 'DELETE',
+    });
+  }
+  
+  async updateBookingStatus(id: string, status: string) {
+    return this.request<Booking>(`/bookings/${id}/status?status=${status}`, {
+      method: 'PATCH',
+    });
+  }
+  
+  async updateTestimonialStatus(id: string) {
+    return this.request<Testimonial>(`/testimonials/${id}/approve`, {
+      method: 'PATCH',
+    });
+  }
+  
+  async getMessages() {
+    return this.request<any[]>('/contact/messages');
+  }
+  
+  async markMessageAsRead(id: string) {
+    return this.request(`/contact/messages/${id}/read`, {
+      method: 'PATCH',
+    });
+  }
+
+  async getPendingTestimonials() {
+    return this.request<Testimonial[]>('/testimonials/pending');
+  }
+  
+  async deleteTestimonial(id: string) {
+    return this.request(`/testimonials/${id}`, {
+      method: 'DELETE',
+    });
+  }
+  
+  async deleteMessage(id: string) {
+    return this.request(`/contact/messages/${id}`, {
+      method: 'DELETE',
+    });
+  }
 }
 
 export default new ApiService();

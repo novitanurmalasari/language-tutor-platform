@@ -1,0 +1,113 @@
+.message-management {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.messages-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.message-card {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s;
+}
+
+.message-card.unread {
+  border-left: 4px solid #3498db;
+}
+
+.message-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.message-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.message-info h3 {
+  margin: 0 0 5px 0;
+  color: #333;
+}
+
+.message-info p {
+  margin: 0;
+  color: #666;
+  font-size: 14px;
+}
+
+.message-date {
+  color: #999;
+  font-size: 14px;
+}
+
+.message-subject {
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.message-content {
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.message-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-mark-read {
+  background-color: #3498db;
+  color: white;
+}
+
+.btn-mark-read:hover {
+  background-color: #2980b9;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .admin-dashboard {
+    flex-direction: column;
+  }
+  
+  .admin-sidebar {
+    width: 100%;
+  }
+  
+  .admin-content {
+    padding: 20px;
+  }
+  
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+  
+  .management-header {
+    flex-direction: column;
+    gap: 20px;
+    align-items: stretch;
+  }
+  
+  .filter-buttons {
+    flex-wrap: wrap;
+  }
+  
+  .courses-table {
+    overflow-x: auto;
+  }
+  
+  .courses-table table {
+    min-width: 800px;
+  }
+}

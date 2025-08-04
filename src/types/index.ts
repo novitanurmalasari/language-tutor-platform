@@ -43,4 +43,5 @@ export interface Testimonial {
   rating: number;
   comment: string;
   date: string;
+  isApproved?: boolean;
 }

@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
-import { useAdmin } from '../../contexts/AdminContext';
+import { useAdminAuth } from '../../contexts/AdminAuthContext';
 import './AdminDashboard.css';
 
 const AdminDashboard: React.FC = () => {
-  const { admin, logout } = useAdmin();
+  const { user: admin, logout } = useAdminAuth();
   const navigate = useNavigate();
 
   const handleLogout = () => {

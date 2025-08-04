@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAdmin } from '../../contexts/AdminContext';
+import { useAdminAuth } from '../../contexts/AdminAuthContext';
 import './AdminLoginPage.css';
 
 const AdminLoginPage: React.FC = () => {
   const navigate = useNavigate();
-  const { login } = useAdmin();
+  const { login } = useAdminAuth();
   const [formData, setFormData] = useState({
     username: '',
     password: ''

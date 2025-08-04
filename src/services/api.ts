@@ -1,8 +1,14 @@
-import { Booking, Course, Testimonial } from "../types";
+import { Booking, ContactMessage, Course, Teacher, Testimonial } from "../types";
 
 const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080/api';
 
 class ApiService {
+  private token: string | null = null;
+
+  setAuthToken(token: string | null) {
+    this.token = token;
+  }
+
   private async request<T>(
     endpoint: string,
     options: RequestInit = {}
@@ -25,6 +31,19 @@ class ApiService {
     return response.json();
   }
 
+
+  // Auth endpoints
+  async login(username: string, password: string) {
+    return this.request<{ token: string; user: any }>('/auth/login', {
+      method: 'POST',
+      body: JSON.stringify({ username, password }),
+    });
+  }
+
+  async getCurrentUser() {
+    return this.request<any>('/auth/me');
+  }
+
   // Course endpoints
   async getCourses() {
     return this.request<Course[]>('/courses');
@@ -32,6 +51,26 @@ class ApiService {
 
   async getCourse(id: string) {
     return this.request<Course>(`/courses/${id}`);
+  }
+
+  async createCourse(course: Partial<Course>) {
+    return this.request<Course>('/courses', {
+      method: 'POST',
+      body: JSON.stringify(course),
+    });
+  }
+
+   async updateCourse(id: string, course: Partial<Course>) {
+    return this.request<Course>(`/courses/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(course),
+    });
+  }
+  
+  async deleteCourse(id: string) {
+    return this.request(`/courses/${id}`, {
+      method: 'DELETE',
+    });
   }
 
   // Booking endpoints
@@ -46,9 +85,32 @@ class ApiService {
     return this.request<Booking[]>('/bookings');
   }
 
+  async updateBookingStatus(id: string, status: string) {
+    return this.request<Booking>(`/bookings/${id}/status`, {
+      method: 'PATCH',
+      body: JSON.stringify({ status }),
+    });
+  }
+
   // Testimonial endpoints
   async getTestimonials() {
     return this.request<Testimonial[]>('/testimonials');
+  }
+
+  async getPendingTestimonials() {
+    return this.request<Testimonial[]>('/testimonials/pending');
+  }
+
+  async approveTestimonial(id: string) {
+    return this.request<Testimonial>(`/testimonials/${id}/approve`, {
+      method: 'PATCH',
+    });
+  }
+  
+  async deleteTestimonial(id: string) {
+    return this.request(`/testimonials/${id}`, {
+      method: 'DELETE',
+    });
   }
 
   // Contact endpoints
@@ -56,6 +118,22 @@ class ApiService {
     return this.request('/contact', {
       method: 'POST',
       body: JSON.stringify(data),
+    });
+  }
+
+  async getMessages() {
+    return this.request<ContactMessage[]>('/contact/messages');
+  }
+  
+  async markMessageAsRead(id: string) {
+    return this.request(`/contact/messages/${id}/read`, {
+      method: 'PATCH',
+    });
+  }
+  
+  async deleteMessage(id: string) {
+    return this.request(`/contact/messages/${id}`, {
+      method: 'DELETE',
     });
   }
 
@@ -72,63 +150,12 @@ class ApiService {
     return this.request<Teacher[]>('/teachers');
   }
   
-  async createCourse(course: Partial<Course>) {
-    return this.request<Course>('/courses', {
-      method: 'POST',
-      body: JSON.stringify(course),
-    });
-  }
-  
-  async updateCourse(id: string, course: Partial<Course>) {
-    return this.request<Course>(`/courses/${id}`, {
-      method: 'PUT',
-      body: JSON.stringify(course),
-    });
-  }
-  
-  async deleteCourse(id: string) {
-    return this.request(`/courses/${id}`, {
-      method: 'DELETE',
-    });
-  }
-  
-  async updateBookingStatus(id: string, status: string) {
-    return this.request<Booking>(`/bookings/${id}/status?status=${status}`, {
-      method: 'PATCH',
-    });
-  }
-  
   async updateTestimonialStatus(id: string) {
     return this.request<Testimonial>(`/testimonials/${id}/approve`, {
       method: 'PATCH',
     });
   }
   
-  async getMessages() {
-    return this.request<any[]>('/contact/messages');
-  }
-  
-  async markMessageAsRead(id: string) {
-    return this.request(`/contact/messages/${id}/read`, {
-      method: 'PATCH',
-    });
-  }
-
-  async getPendingTestimonials() {
-    return this.request<Testimonial[]>('/testimonials/pending');
-  }
-  
-  async deleteTestimonial(id: string) {
-    return this.request(`/testimonials/${id}`, {
-      method: 'DELETE',
-    });
-  }
-  
-  async deleteMessage(id: string) {
-    return this.request(`/contact/messages/${id}`, {
-      method: 'DELETE',
-    });
-  }
 }
 
 export default new ApiService();

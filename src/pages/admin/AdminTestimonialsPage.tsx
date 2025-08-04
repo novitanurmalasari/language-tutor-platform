@@ -1,4 +1,4 @@
-mport React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Testimonial } from '../../types';
 import apiService from '../../services/api';
 import './AdminTestimonialsPage.css';

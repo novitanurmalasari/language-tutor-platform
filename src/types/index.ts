@@ -21,6 +21,8 @@ export interface Course {
   schedule: string[];
   maxStudents: number;
   currentStudents: number;
+  isActive: boolean;
+  teacherId?: string;
 }
 
 export interface Booking {
@@ -29,10 +31,13 @@ export interface Booking {
   studentEmail: string;
   studentPhone: string;
   courseId: string;
+  courseTitle?: string;
+  courseLanguage?: string;
+  courseLevel?: string;
   date: string;
   time: string;
   message?: string;
-  status: 'pending' | 'confirmed' | 'cancelled';
+  status: 'pending' | 'confirmed' | 'cancelled' | 'completed';
   createdAt: Date;
 }
 
@@ -43,5 +48,15 @@ export interface Testimonial {
   rating: number;
   comment: string;
   date: string;
-  isApproved?: boolean;
+  isApproved: boolean;
+}
+
+export interface ContactMessage {
+  id: string;
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+  isRead: boolean;
+  createdAt: string;
 }

@@ -16,12 +16,12 @@ import BookingPage from './pages/BookingPage';
 import ContactPage from './pages/ContactPage';
 
 // Admin Pages
-import LoginPage from './pages/admin/LoginPage';
-import DashboardPage from './pages/admin/DashboardPage';
-import AdminCoursesPage from './pages/admin/CoursesPage';
-import CourseFormPage from './pages/admin/CourseFormPage';
-import AdminBookingsPage from './pages/admin/BookingsPage';
-import TestimonialsPage from './pages/admin/TestimonialsPage';
+import LoginPage from './pages/admin/AdminLoginPage';
+import DashboardPage from './pages/admin/AdminDashboard';
+import AdminCoursesPage from './pages/admin/AdminCoursesPage';
+import CourseFormPage from './pages/admin/AdminCourseForm';
+import AdminBookingsPage from './pages/admin/AdminBookingsPage';
+import TestimonialsPage from './pages/admin/AdminTestimonialsPage';
 
 import './App.css';
 

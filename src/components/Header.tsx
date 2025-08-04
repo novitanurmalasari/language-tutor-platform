@@ -32,6 +32,9 @@ const Header: React.FC = () => {
             <Link to="/contact" className="nav-link" onClick={() => setIsMenuOpen(false)}>
               Contact
             </Link>
+            <Link to="/admin/login" className="nav-link" onClick={() => setIsMenuOpen(false)}>
+              Admin
+            </Link>
           </nav>
           
           <button className="menu-toggle" onClick={toggleMenu}>

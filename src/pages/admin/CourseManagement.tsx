@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Course, Teacher } from '../../types';
 import apiService from '../../services/api';
-import CourseForm from '../../components/admin/CourseForm';
+import CourseForm from './CourseForm';
 import './CourseManagement.css';
 
 const CourseManagement: React.FC = () => {

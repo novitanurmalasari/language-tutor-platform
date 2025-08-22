@@ -14,12 +14,19 @@ class ApiService {
     options: RequestInit = {}
   ): Promise<T> {
     const url = `${API_BASE_URL}${endpoint}`;
+    const headers: Record<string, string> = {
+      'Content-Type': 'application/json',
+      ...(options.headers as Record<string, string> || {}),
+    };
+
+    // Add Authorization header if token exists
+    if (this.token) {
+      headers['Authorization'] = `Bearer ${this.token}`;
+    }
+
     const config: RequestInit = {
       ...options,
-      headers: {
-        'Content-Type': 'application/json',
-        ...options.headers,
-      },
+      headers,
     };
 
     const response = await fetch(url, config);
@@ -34,7 +41,13 @@ class ApiService {
 
   // Auth endpoints
   async login(username: string, password: string) {
-    return this.request<{ token: string; user: any }>('/auth/login', {
+    return this.request<{
+      accessToken: string;
+      tokenType: string;
+      username: string;
+      email: string;
+      role: string;
+    }>('/auth/login', {
       method: 'POST',
       body: JSON.stringify({ username, password }),
     });

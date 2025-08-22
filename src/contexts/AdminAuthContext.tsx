@@ -38,20 +38,36 @@ export const AdminAuthProvider: React.FC<AdminAuthProviderProps> = ({ children }
 
   useEffect(() => {
     if (token) {
-      // Verify token and get user data
-      apiService.setAuthToken(token);
-      fetchUserData();
-    } else {
-      setIsLoading(false);
+      // Try to get stored user data from localStorage
+      const storedUser = localStorage.getItem('adminUser');
+      if (storedUser) {
+        try {
+          const userData = JSON.parse(storedUser);
+          setUser(userData);
+          apiService.setAuthToken(token);
+        } catch (error) {
+          console.error('Failed to parse stored user data:', error);
+          logout();
+        }
+      } else {
+        // If no stored user data, try to fetch from backend
+        apiService.setAuthToken(token);
+        fetchUserData();
+      }
     }
-  }, [token]);
+    setIsLoading(false);
+  }, []);
 
   const fetchUserData = async () => {
     try {
+      // Try to get user data from backend
       const userData = await apiService.getCurrentUser();
       setUser(userData);
+      localStorage.setItem('adminUser', JSON.stringify(userData));
     } catch (error) {
-      logout();
+      // If fetching user data fails, just log the error
+      // Don't logout immediately as the token might still be valid
+      console.error('Failed to fetch user data:', error);
     } finally {
       setIsLoading(false);
     }
@@ -59,9 +75,18 @@ export const AdminAuthProvider: React.FC<AdminAuthProviderProps> = ({ children }
 
   const login = async (username: string, password: string) => {
     const response = await apiService.login(username, password);
-    const { token, user } = response;
+    
+    // Handle the actual backend response structure
+    const token = response.accessToken;
+    const user = {
+      id: response.username, // Using username as ID since backend doesn't provide ID
+      username: response.username,
+      email: response.email,
+      role: response.role
+    };
     
     localStorage.setItem('adminToken', token);
+    localStorage.setItem('adminUser', JSON.stringify(user));
     apiService.setAuthToken(token);
     setToken(token);
     setUser(user);
@@ -69,6 +94,7 @@ export const AdminAuthProvider: React.FC<AdminAuthProviderProps> = ({ children }
 
   const logout = () => {
     localStorage.removeItem('adminToken');
+    localStorage.removeItem('adminUser');
     apiService.setAuthToken(null);
     setToken(null);
     setUser(null);
